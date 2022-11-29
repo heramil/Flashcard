@@ -1,63 +1,49 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import NotFound from "./NotFound";
-import { BrowserRouter as Router, Route, Routes, Switch } from "react-router-dom";
-import HomePage from "../Pages/HomePage";
-import DeckNewPage from "../Pages/DeckNewPage";
-import DeckEditPage from "../Pages/DeckEditPage";
-import DeckViewPage from "../Pages/DeckViewPage";
-import StudyPage from "../Pages/StudyPage";
-import NewCardPage from "../Pages/NewCardPage";
-import CardEditPage from "../Pages/CardEditPage";
-
-
+import CreateDeck from "./CreateDeck";
+import Home from "./Home";
+import Deck from "./Deck";
+import Study from "./Study";
+import AddCard from "./AddCard";
+import EditCard from "./EditCard";
+import EditDeck from "./EditDeck";
 
 function Layout() {
-
   return (
-    <>
-    <Header />
-
-      <Switch>
-      {/* New Deck Page */}
-      <Route path="/decks/new">
-        <DeckNewPage />
-      </Route>
-      {/* Study Page */}
-      <Route path="/decks/:deckId/study">
-        <StudyPage />
-      </Route>
-      {/* Edit Deck Page */}
-      <Route path="/decks/:deckId/edit">
-        <DeckEditPage />
-      </Route>
-      {/* New Card Page */}
-      <Route path="/decks/:deckId/cards/new">
-        <NewCardPage />
-      </Route>
-      {/* Edit Card Page */}
-      <Route path="/decks/:deckId/cards/:cardId/edit">
-        <CardEditPage />
-      </Route>
-      {/* Home Page */}
-      <Route exact={true} path="/">
-        <HomePage />
-      </Route>
-      {/* Deck View Page */}
-      <Route path="/decks/:deckId">
-        <DeckViewPage />
-      </Route>
-      {/* Not Found Screen */}
-      <Route>
-        <NotFound />
-      </Route>
-      </Switch>
-
-    </>
+    <div>
+      <Header />
+      <div className="container">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/decks/new">
+            <CreateDeck />
+          </Route>
+          <Route exact path="/decks/:deckId">
+            <Deck />
+          </Route>
+          <Route path="/decks/:deckId/study">
+            <Study />
+          </Route>
+          <Route path="/decks/:deckId/cards/new">
+            <AddCard />
+          </Route>
+          <Route exact path="/decks/:deckId/cards/:cardId/edit">
+            <EditCard />
+          </Route>
+          <Route path="/decks/:deckId/edit">
+            <EditDeck />
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </div>
+    </div>
   );
-
 }
 
 export default Layout;
-
-
